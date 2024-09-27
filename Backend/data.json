@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "name": "Apple",
+    "description": "Fresh and juicy apples.",
+    "url": "/images/apple.jpg",
+    "category": "Fruits",
+    "available_stock": 50,
+    "cost": 1.5
+  },
+  {
+    "id": 2,
+    "name": "Banana",
+    "description": "Ripe yellow bananas.",
+    "url": "/images/banana.jpg",
+    "category": "Fruits",
+    "available_stock": 100,
+    "cost": 0.5
+  },
+  {
+    "id": 3,
+    "name": "Orange",
+    "description": "Sweet and tangy oranges.",
+    "url": "/images/orange.jpg",
+    "category": "Fruits",
+    "available_stock": 75,
+    "cost": 1.2
+  },
+  {
+    "id": 4,
+    "name": "Mango",
+    "description": "Tropical juicy mangoes.",
+    "url": "/images/mango.jpg",
+    "category": "Fruits",
+    "available_stock": 30,
+    "cost": 2.0
+  },
+  {
+    "id": 5,
+    "name": "Strawberry",
+    "description": "Fresh strawberries, perfect for desserts.",
+    "url": "/images/strawberry.jpg",
+    "category": "Fruits",
+    "available_stock": 40,
+    "cost": 3.0
+  },
+  {
+    "id": 6,
+    "name": "Pineapple",
+    "description": "Juicy tropical pineapple.",
+    "url": "/images/pineapple.jpg",
+    "category": "Fruits",
+    "available_stock": 20,
+    "cost": 2.5
+  },
+  {
+    "id": 7,
+    "name": "Grapes",
+    "description": "Fresh seedless grapes.",
+    "url": "/images/grapes.jpg",
+    "category": "Fruits",
+    "available_stock": 60,
+    "cost": 2.8
+  },
+  {
+    "id": 8,
+    "name": "Kiwi",
+    "description": "Delicious and nutritious kiwis.",
+    "url": "/images/kiwi.jpg",
+    "category": "Fruits",
+    "available_stock": 35,
+    "cost": 1.8
+  },
+  {
+    "id": 9,
+    "name": "Blueberry",
+    "description": "Freshly picked blueberries.",
+    "url": "/images/blueberry.jpg",
+    "category": "Fruits",
+    "available_stock": 50,
+    "cost": 4.0
+  },
+  {
+    "id": 10,
+    "name": "Watermelon",
+    "description": "Large and refreshing watermelons.",
+    "url": "/images/watermelon.jpg",
+    "category": "Fruits",
+    "available_stock": 15,
+    "cost": 5.0
+  },
+  {
+    "id": 11,
+    "name": "Carrot",
+    "description": "Crunchy orange carrots.",
+    "url": "/images/carrot.jpg",
+    "category": "Vegetables",
+    "available_stock": 80,
+    "cost": 0.7
+  },
+  {
+    "id": 12,
+    "name": "Broccoli",
+    "description": "Fresh green broccoli.",
+    "url": "/images/broccoli.jpg",
+    "category": "Vegetables",
+    "available_stock": 45,
+    "cost": 1.3
+  },
+  {
+    "id": 13,
+    "name": "Spinach",
+    "description": "Leafy green spinach.",
+    "url": "/images/spinach.jpg",
+    "category": "Vegetables",
+    "available_stock": 70,
+    "cost": 1.0
+  },
+  {
+    "id": 14,
+    "name": "Tomato",
+    "description": "Ripe red tomatoes.",
+    "url": "/images/tomato.jpg",
+    "category": "Vegetables",
+    "available_stock": 90,
+    "cost": 0.9
+  },
+  {
+    "id": 15,
+    "name": "Bell Pepper",
+    "description": "Colorful bell peppers.",
+    "url": "/images/bell_pepper.jpg",
+    "category": "Vegetables",
+    "available_stock": 55,
+    "cost": 1.5
+  },
+  {
+    "id": 16,
+    "name": "Cucumber",
+    "description": "Fresh green cucumbers.",
+    "url": "/images/cucumber.jpg",
+    "category": "Vegetables",
+    "available_stock": 60,
+    "cost": 0.8
+  },
+  {
+    "id": 17,
+    "name": "Cauliflower",
+    "description": "Fresh white cauliflower.",
+    "url": "/images/cauliflower.jpg",
+    "category": "Vegetables",
+    "available_stock": 40,
+    "cost": 1.2
+  },
+  {
+    "id": 18,
+    "name": "Zucchini",
+    "description": "Green zucchini for your meals.",
+    "url": "/images/zucchini.jpg",
+    "category": "Vegetables",
+    "available_stock": 50,
+    "cost": 1.1
+  },
+  {
+    "id": 19,
+    "name": "Eggplant",
+    "description": "Glossy purple eggplants.",
+    "url": "/images/eggplant.jpg",
+    "category": "Vegetables",
+    "available_stock": 30,
+    "cost": 1.4
+  },
+  {
+    "id": 20,
+    "name": "Kale",
+    "description": "Leafy green kale.",
+    "url": "/images/kale.jpg",
+    "category": "Vegetables",
+    "available_stock": 45,
+    "cost": 1.6
+  },
+  {
+    "id": 21,
+    "name": "Chicken",
+    "description": "Fresh poultry chicken.",
+    "url": "/images/chicken.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 100,
+    "cost": 5.0
+  },
+  {
+    "id": 22,
+    "name": "Beef",
+    "description": "High-quality beef cuts.",
+    "url": "/images/beef.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 50,
+    "cost": 8.5
+  },
+  {
+    "id": 23,
+    "name": "Pork",
+    "description": "Fresh pork cuts.",
+    "url": "/images/pork.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 40,
+    "cost": 7.0
+  },
+  {
+    "id": 24,
+    "name": "Salmon",
+    "description": "Fresh Atlantic salmon.",
+    "url": "/images/salmon.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 30,
+    "cost": 12.0
+  },
+  {
+    "id": 25,
+    "name": "Shrimp",
+    "description": "Delicious and fresh shrimp.",
+    "url": "/images/shrimp.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 60,
+    "cost": 15.0
+  },
+  {
+    "id": 26,
+    "name": "Turkey",
+    "description": "Tender turkey meat.",
+    "url": "/images/turkey.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 25,
+    "cost": 10.0
+  },
+  {
+    "id": 27,
+    "name": "Lamb",
+    "description": "Fresh lamb meat.",
+    "url": "/images/lamb.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 20,
+    "cost": 14.0
+  },
+  {
+    "id": 28,
+    "name": "Tuna",
+    "description": "Fresh tuna fish.",
+    "url": "/images/tuna.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 40,
+    "cost": 11.5
+  },
+  {
+    "id": 29,
+    "name": "Duck",
+    "description": "Fresh duck meat.",
+    "url": "/images/duck.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 15,
+    "cost": 13.0
+  },
+  {
+    "id": 30,
+    "name": "Crab",
+    "description": "Fresh and tasty crabs.",
+    "url": "/images/crab.jpg",
+    "category": "Non-Vegetarian",
+    "available_stock": 30,
+    "cost": 16.0
+  },
+  {
+    "id": 31,
+    "name": "Baguette",
+    "description": "Freshly baked French baguette.",
+    "url": "/images/baguette.jpg",
+    "category": "Breads",
+    "available_stock": 50,
+    "cost": 2.5
+  },
+  {
+    "id": 32,
+    "name": "Sourdough",
+    "description": "Artisan sourdough bread.",
+    "url": "/images/sourdough.jpg",
+    "category": "Breads",
+    "available_stock": 35,
+    "cost": 3.0
+  },
+  {
+    "id": 33,
+    "name": "Whole Wheat Bread",
+    "description": "Healthy whole wheat bread.",
+    "url": "/images/whole_wheat_bread.jpg",
+    "category": "Breads",
+    "available_stock": 40,
+    "cost": 2.0
+  },
+  {
+    "id": 34,
+    "name": "Focaccia",
+    "description": "Freshly baked Italian focaccia.",
+    "url": "/images/focaccia.jpg",
+    "category": "Breads",
+    "available_stock": 25,
+    "cost": 3.5
+  },
+  {
+    "id": 35,
+    "name": "Ciabatta",
+    "description": "Italian ciabatta bread.",
+    "url": "/images/ciabatta.jpg",
+    "category": "Breads",
+    "available_stock": 30,
+    "cost": 2.8
+  },
+  {
+    "id": 36,
+    "name": "Pita Bread",
+    "description": "Soft and fresh pita bread.",
+    "url": "/images/pita_bread.jpg",
+    "category": "Breads",
+    "available_stock": 50,
+    "cost": 2.0
+  },
+  {
+    "id": 37,
+    "name": "Rye Bread",
+    "description": "Delicious rye bread.",
+    "url": "/images/rye_bread.jpg",
+    "category": "Breads",
+    "available_stock": 20,
+    "cost": 3.0
+  },
+  {
+    "id": 38,
+    "name": "Naan",
+    "description": "Freshly baked Indian naan.",
+    "url": "/images/naan.jpg",
+    "category": "Breads",
+    "available_stock": 40,
+    "cost": 2.5
+  },
+  {
+    "id": 39,
+    "name": "Croissant",
+    "description": "Flaky and buttery croissants.",
+    "url": "/images/croissant.jpg",
+    "category": "Breads",
+    "available_stock": 60,
+    "cost": 1.8
+  },
+  {
+    "id": 40,
+    "name": "Bagel",
+    "description": "Chewy and fresh bagels.",
+    "url": "/images/bagel.jpg",
+    "category": "Breads",
+    "available_stock": 50,
+    "cost": 1.5
+  },
+  {
+    "id": 41,
+    "name": "Milk",
+    "description": "Fresh whole milk.",
+    "url": "/images/milk.jpg",
+    "category": "Dairy",
+    "available_stock": 100,
+    "cost": 1.0
+  },
+  {
+    "id": 42,
+    "name": "Cheese",
+    "description": "Variety of fresh cheeses.",
+    "url": "/images/cheese.jpg",
+    "category": "Dairy",
+    "available_stock": 40,
+    "cost": 5.0
+  },
+  {
+    "id": 43,
+    "name": "Yogurt",
+    "description": "Healthy and fresh yogurt.",
+    "url": "/images/yogurt.jpg",
+    "category": "Dairy",
+    "available_stock": 80,
+    "cost": 2.0
+  },
+  {
+    "id": 44,
+    "name": "Butter",
+    "description": "Creamy unsalted butter.",
+    "url": "/images/butter.jpg",
+    "category": "Dairy",
+    "available_stock": 60,
+    "cost": 3.0
+  },
+  {
+    "id": 45,
+    "name": "Cream",
+    "description": "Rich and thick cream.",
+    "url": "/images/cream.jpg",
+    "category": "Dairy",
+    "available_stock": 50,
+    "cost": 2.5
+  },
+  {
+    "id": 46,
+    "name": "Cottage Cheese",
+    "description": "Fresh and healthy cottage cheese.",
+    "url": "/images/cottage_cheese.jpg",
+    "category": "Dairy",
+    "available_stock": 30,
+    "cost": 4.0
+  },
+  {
+    "id": 47,
+    "name": "Sour Cream",
+    "description": "Tangy and fresh sour cream.",
+    "url": "/images/sour_cream.jpg",
+    "category": "Dairy",
+    "available_stock": 40,
+    "cost": 2.0
+  },
+  {
+    "id": 48,
+    "name": "Ice Cream",
+    "description": "Variety of ice cream flavors.",
+    "url": "/images/ice_cream.jpg",
+    "category": "Dairy",
+    "available_stock": 50,
+    "cost": 3.5
+  },
+  {
+    "id": 49,
+    "name": "Kefir",
+    "description": "Probiotic-rich kefir.",
+    "url": "/images/kefir.jpg",
+    "category": "Dairy",
+    "available_stock": 35,
+    "cost": 3.0
+  },
+  {
+    "id": 50,
+    "name": "Ricotta",
+    "description": "Fresh and creamy ricotta cheese.",
+    "url": "/images/ricotta.jpg",
+    "category": "Dairy",
+    "available_stock": 30,
+    "cost": 4.0
+  },
+  {
+    "id": 51,
+    "name": "Rice",
+    "description": "Premium long grain rice.",
+    "url": "/images/rice.jpg",
+    "category": "Other",
+    "available_stock": 150,
+    "cost": 1.2
+  },
+  {
+    "id": 52,
+    "name": "Pasta",
+    "description": "Variety of pasta types.",
+    "url": "/images/pasta.jpg",
+    "category": "Other",
+    "available_stock": 100,
+    "cost": 2.0
+  },
+  {
+    "id": 53,
+    "name": "Quinoa",
+    "description": "Organic quinoa.",
+    "url": "/images/quinoa.jpg",
+    "category": "Other",
+    "available_stock": 80,
+    "cost": 4.0
+  },
+  {
+    "id": 54,
+    "name": "Oats",
+    "description": "Rolled oats for breakfast.",
+    "url": "/images/oats.jpg",
+    "category": "Other",
+    "available_stock": 70,
+    "cost": 2.5
+  },
+  {
+    "id": 55,
+    "name": "Lentils",
+    "description": "Organic and healthy lentils.",
+    "url": "/images/lentils.jpg",
+    "category": "Other",
+    "available_stock": 90,
+    "cost": 1.8
+  },
+  {
+    "id": 56,
+    "name": "Nuts",
+    "description": "Assorted nuts including almonds.",
+    "url": "/images/nuts.jpg",
+    "category": "Other",
+    "available_stock": 60,
+    "cost": 5.0
+  },
+  {
+    "id": 57,
+    "name": "Seeds",
+    "description": "Chia seeds for a healthy diet.",
+    "url": "/images/seeds.jpg",
+    "category": "Other",
+    "available_stock": 50,
+    "cost": 3.0
+  },
+  {
+    "id": 58,
+    "name": "Honey",
+    "description": "Organic raw honey.",
+    "url": "/images/honey.jpg",
+    "category": "Other",
+    "available_stock": 40,
+    "cost": 6.0
+  },
+  {
+    "id": 59,
+    "name": "Tofu",
+    "description": "Organic and healthy tofu.",
+    "url": "/images/tofu.jpg",
+    "category": "Other",
+    "available_stock": 30,
+    "cost": 2.5
+  },
+  {
+    "id": 60,
+    "name": "Spices",
+    "description": "Assorted spices for cooking.",
+    "url": "/images/spices.jpg",
+    "category": "Other",
+    "available_stock": 100,
+    "cost": 3.5
+  }
+]
