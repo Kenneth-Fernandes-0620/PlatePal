@@ -1,0 +1,24 @@
+.foodItemsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 1200px) {
+  .foodItemsGrid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .foodItemsGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .foodItemsGrid {
+    grid-template-columns: repeat(1, 1fr); /* 1 column for small screens */
+  }
+}

@@ -1,0 +1,923 @@
+[
+  {
+    "id": 1426,
+    "name": "almonds",
+    "description": "Fresh almonds",
+    "category": "others",
+    "stock": 84,
+    "cost": 23.47
+  },
+  {
+    "id": 6618,
+    "name": "apple_shimla",
+    "description": "Fresh apple shimla",
+    "category": "fruit",
+    "stock": 34,
+    "cost": 55.98
+  },
+  {
+    "id": 8998,
+    "name": "arhad_dal",
+    "description": "Fresh arhad dal",
+    "category": "others",
+    "stock": 73,
+    "cost": 50.75
+  },
+  {
+    "id": 3306,
+    "name": "banana",
+    "description": "Fresh banana",
+    "category": "fruit",
+    "stock": 21,
+    "cost": 32.94
+  },
+  {
+    "id": 5612,
+    "name": "banana_bread",
+    "description": "Fresh banana bread",
+    "category": "breads",
+    "stock": 67,
+    "cost": 38.88
+  },
+  {
+    "id": 7486,
+    "name": "basmati_rice",
+    "description": "Fresh basmati rice",
+    "category": "others",
+    "stock": 50,
+    "cost": 84.89
+  },
+  {
+    "id": 4254,
+    "name": "bata_fish",
+    "description": "Fresh bata fish",
+    "category": "non-veg",
+    "stock": 9,
+    "cost": 60.13
+  },
+  {
+    "id": 9298,
+    "name": "beans",
+    "description": "Fresh beans",
+    "category": "vegetable",
+    "stock": 57,
+    "cost": 19.39
+  },
+  {
+    "id": 2935,
+    "name": "beetroot",
+    "description": "Fresh beetroot",
+    "category": "vegetable",
+    "stock": 9,
+    "cost": 3.82
+  },
+  {
+    "id": 8701,
+    "name": "bell_pepper",
+    "description": "Fresh bell pepper",
+    "category": "vegetable",
+    "stock": 60,
+    "cost": 22.15
+  },
+  {
+    "id": 4016,
+    "name": "blend_cheese",
+    "description": "Fresh blend cheese",
+    "category": "dairy",
+    "stock": 51,
+    "cost": 66.76
+  },
+  {
+    "id": 6840,
+    "name": "blueberry",
+    "description": "Fresh blueberry",
+    "category": "fruit",
+    "stock": 99,
+    "cost": 66.05
+  },
+  {
+    "id": 5322,
+    "name": "bombay_duck",
+    "description": "Fresh bombay duck",
+    "category": "non-veg",
+    "stock": 91,
+    "cost": 36.85
+  },
+  {
+    "id": 6503,
+    "name": "brocoli",
+    "description": "Fresh brocoli",
+    "category": "vegetable",
+    "stock": 79,
+    "cost": 20.98
+  },
+  {
+    "id": 2655,
+    "name": "bun_bread",
+    "description": "Fresh bun bread",
+    "category": "breads",
+    "stock": 33,
+    "cost": 17.14
+  },
+  {
+    "id": 7897,
+    "name": "butter_salted",
+    "description": "Fresh butter salted",
+    "category": "dairy",
+    "stock": 4,
+    "cost": 95.17
+  },
+  {
+    "id": 4567,
+    "name": "butter_unsalted",
+    "description": "Fresh butter unsalted",
+    "category": "dairy",
+    "stock": 73,
+    "cost": 96.56
+  },
+  {
+    "id": 8135,
+    "name": "carrot",
+    "description": "Fresh carrot",
+    "category": "vegetable",
+    "stock": 83,
+    "cost": 27.45
+  },
+  {
+    "id": 3460,
+    "name": "cauliflower",
+    "description": "Fresh cauliflower",
+    "category": "vegetable",
+    "stock": 94,
+    "cost": 26.44
+  },
+  {
+    "id": 4713,
+    "name": "channa_dal",
+    "description": "Fresh channa dal",
+    "category": "others",
+    "stock": 92,
+    "cost": 90.96
+  },
+  {
+    "id": 2774,
+    "name": "cheese_block",
+    "description": "Fresh cheese block",
+    "category": "dairy",
+    "stock": 97,
+    "cost": 82.86
+  },
+  {
+    "id": 2452,
+    "name": "cheese_cubes",
+    "description": "Fresh cheese cubes",
+    "category": "dairy",
+    "stock": 38,
+    "cost": 75.77
+  },
+  {
+    "id": 9445,
+    "name": "cheese_slices",
+    "description": "Fresh cheese slices",
+    "category": "dairy",
+    "stock": 80,
+    "cost": 27.29
+  },
+  {
+    "id": 9903,
+    "name": "cheese_spread",
+    "description": "Fresh cheese spread",
+    "category": "dairy",
+    "stock": 2,
+    "cost": 82.54
+  },
+  {
+    "id": 4718,
+    "name": "chia_seeds",
+    "description": "Fresh chia seeds",
+    "category": "others",
+    "stock": 62,
+    "cost": 26.12
+  },
+  {
+    "id": 6810,
+    "name": "chicken",
+    "description": "Fresh chicken",
+    "category": "non-veg",
+    "stock": 78,
+    "cost": 49.86
+  },
+  {
+    "id": 2901,
+    "name": "chicken_liver",
+    "description": "Fresh chicken liver",
+    "category": "non-veg",
+    "stock": 96,
+    "cost": 67.89
+  },
+  {
+    "id": 1828,
+    "name": "chicken_malai_tikka",
+    "description": "Fresh chicken malai tikka",
+    "category": "non-veg",
+    "stock": 57,
+    "cost": 99.74
+  },
+  {
+    "id": 8106,
+    "name": "chicken_sausage",
+    "description": "Fresh chicken sausage",
+    "category": "non-veg",
+    "stock": 81,
+    "cost": 68.12
+  },
+  {
+    "id": 6836,
+    "name": "chilli_powder",
+    "description": "Fresh chilli powder",
+    "category": "others",
+    "stock": 26,
+    "cost": 63.73
+  },
+  {
+    "id": 2951,
+    "name": "chocochip_ice_cream",
+    "description": "Fresh chocochip ice cream",
+    "category": "others",
+    "stock": 49,
+    "cost": 29.67
+  },
+  {
+    "id": 1244,
+    "name": "chocolate_brownie_ice_cream",
+    "description": "Fresh chocolate brownie ice cream",
+    "category": "others",
+    "stock": 65,
+    "cost": 87.65
+  },
+  {
+    "id": 7088,
+    "name": "corn",
+    "description": "Fresh corn",
+    "category": "vegetable",
+    "stock": 29,
+    "cost": 53.61
+  },
+  {
+    "id": 8129,
+    "name": "cream",
+    "description": "Fresh cream",
+    "category": "dairy",
+    "stock": 75,
+    "cost": 89.92
+  },
+  {
+    "id": 6652,
+    "name": "cream_cheese",
+    "description": "Fresh cream cheese",
+    "category": "dairy",
+    "stock": 93,
+    "cost": 57.49
+  },
+  {
+    "id": 9941,
+    "name": "crissant_bread",
+    "description": "Fresh crissant bread",
+    "category": "breads",
+    "stock": 5,
+    "cost": 70.26
+  },
+  {
+    "id": 9017,
+    "name": "cucumber",
+    "description": "Fresh cucumber",
+    "category": "vegetable",
+    "stock": 3,
+    "cost": 95.76
+  },
+  {
+    "id": 9191,
+    "name": "custard_apple",
+
+    "description": "Fresh custard apple",
+    "category": "fruit",
+    "stock": 19,
+    "cost": 96.32
+  },
+  {
+    "id": 5838,
+    "name": "digestive_wheat_bread",
+    "description": "Fresh digestive wheat bread",
+    "category": "breads",
+    "stock": 69,
+    "cost": 54.93
+  },
+  {
+    "id": 7628,
+    "name": "dry_fish",
+    "description": "Fresh dry fish",
+    "category": "non-veg",
+    "stock": 18,
+    "cost": 87.42
+  },
+  {
+    "id": 1378,
+    "name": "dry_fruit_mix",
+    "description": "Fresh dry fruit mix",
+    "category": "others",
+    "stock": 95,
+    "cost": 36.05
+  },
+  {
+    "id": 2593,
+    "name": "eggplant",
+    "description": "Fresh eggplant",
+    "category": "vegetable",
+    "stock": 78,
+    "cost": 25.24
+  },
+  {
+    "id": 2479,
+    "name": "feta_cheese",
+    "description": "Fresh feta cheese",
+    "category": "dairy",
+    "stock": 87,
+    "cost": 37.94
+  },
+  {
+    "id": 8722,
+    "name": "fourgrain_sourdough_bread",
+    "description": "Fresh fourgrain sourdough bread",
+    "category": "breads",
+    "stock": 57,
+    "cost": 63.35
+  },
+  {
+    "id": 1671,
+    "name": "fresh_cream",
+    "description": "Fresh fresh cream",
+    "category": "dairy",
+    "stock": 14,
+    "cost": 69.85
+  },
+  {
+    "id": 5716,
+    "name": "fruit_bread",
+    "description": "Fresh fruit bread",
+    "category": "breads",
+    "stock": 68,
+    "cost": 88.59
+  },
+  {
+    "id": 2001,
+    "name": "fruit_ice_cream",
+    "description": "Fresh fruit ice cream",
+    "category": "others",
+    "stock": 76,
+    "cost": 19.63
+  },
+  {
+    "id": 7645,
+    "name": "fruit_yogurt",
+    "description": "Fresh fruit yogurt",
+    "category": "dairy",
+    "stock": 98,
+    "cost": 61.9
+  },
+  {
+    "id": 7744,
+    "name": "fusilli_pasta",
+    "description": "Fresh fusilli pasta",
+    "category": "others",
+    "stock": 83,
+    "cost": 89.77
+  },
+  {
+    "id": 2018,
+    "name": "garlic_bread",
+    "description": "Fresh garlic bread",
+    "category": "breads",
+    "stock": 8,
+    "cost": 1.39
+  },
+  {
+    "id": 1954,
+    "name": "goat",
+    "description": "Fresh goat",
+    "category": "non-veg",
+    "stock": 83,
+    "cost": 81.98
+  },
+  {
+    "id": 6611,
+    "name": "grapes",
+    "description": "Fresh grapes",
+    "category": "fruit",
+    "stock": 95,
+    "cost": 83.02
+  },
+  {
+    "id": 3389,
+    "name": "greek_yogurt",
+    "description": "Fresh greek yogurt",
+    "category": "dairy",
+    "stock": 25,
+    "cost": 44.89
+  },
+  {
+    "id": 7853,
+    "name": "hing",
+    "description": "Fresh hing",
+    "category": "others",
+    "stock": 12,
+    "cost": 8.15
+  },
+  {
+    "id": 2412,
+    "name": "honey",
+    "description": "Fresh honey",
+    "category": "others",
+    "stock": 64,
+    "cost": 23.43
+  },
+  {
+    "id": 1442,
+    "name": "ice_apple",
+    "description": "Fresh ice apple",
+    "category": "fruit",
+    "stock": 65,
+    "cost": 88.82
+  },
+  {
+    "id": 8456,
+    "name": "jeera",
+    "description": "Fresh jeera",
+    "category": "others",
+    "stock": 43,
+    "cost": 69.5
+  },
+  {
+    "id": 8818,
+    "name": "jeera_powder",
+    "description": "Fresh jeera powder",
+    "category": "others",
+    "stock": 51,
+    "cost": 83.82
+  },
+  {
+    "id": 2940,
+    "name": "kiwi",
+    "description": "Fresh kiwi",
+    "category": "fruit",
+    "stock": 40,
+    "cost": 33.33
+  },
+  {
+    "id": 4422,
+    "name": "kolam_rice",
+    "description": "Fresh kolam rice",
+    "category": "others",
+    "stock": 56,
+    "cost": 34.19
+  },
+  {
+    "id": 6895,
+    "name": "kulcha_bread",
+    "description": "Fresh kulcha bread",
+    "category": "breads",
+    "stock": 45,
+    "cost": 73.2
+  },
+  {
+    "id": 7164,
+    "name": "long_grain_rice",
+    "description": "Fresh long grain rice",
+    "category": "others",
+    "stock": 46,
+    "cost": 59.92
+  },
+  {
+    "id": 5751,
+    "name": "macroni_pasta",
+    "description": "Fresh macroni pasta",
+    "category": "others",
+    "stock": 22,
+    "cost": 54.68
+  },
+  {
+    "id": 6515,
+    "name": "makhana",
+    "description": "Fresh makhana",
+    "category": "others",
+    "stock": 73,
+    "cost": 77.98
+  },
+  {
+    "id": 7669,
+    "name": "mango",
+    "description": "Fresh mango",
+    "category": "fruit",
+    "stock": 93,
+    "cost": 90.01
+  },
+  {
+    "id": 1803,
+    "name": "mango_ice_cream",
+    "description": "Fresh mango ice cream",
+    "category": "others",
+    "stock": 48,
+    "cost": 98.95
+  },
+  {
+    "id": 2185,
+    "name": "masoori_rice",
+    "description": "Fresh masoori rice",
+    "category": "others",
+    "stock": 83,
+    "cost": 69.65
+  },
+  {
+    "id": 7739,
+    "name": "masoor_dal",
+    "description": "Fresh masoor dal",
+    "category": "others",
+    "stock": 45,
+    "cost": 83.73
+  },
+  {
+    "id": 2628,
+    "name": "milk_bread",
+    "description": "Fresh milk bread",
+    "category": "breads",
+    "stock": 81,
+    "cost": 73.29
+  },
+  {
+    "id": 1473,
+    "name": "mix_dal",
+    "description": "Fresh mix dal",
+    "category": "others",
+    "stock": 4,
+    "cost": 58.98
+  },
+  {
+    "id": 2591,
+    "name": "moong_dal",
+    "description": "Fresh moong dal",
+    "category": "others",
+    "stock": 14,
+    "cost": 83.64
+  },
+  {
+    "id": 5485,
+    "name": "multigrain_bread",
+    "description": "Fresh multigrain bread",
+    "category": "breads",
+    "stock": 45,
+    "cost": 6.7
+  },
+  {
+    "id": 2226,
+    "name": "multi_protein_bread",
+    "description": "Fresh multi protein bread",
+    "category": "breads",
+    "stock": 76,
+    "cost": 43.07
+  },
+  {
+    "id": 7456,
+    "name": "oats",
+    "description": "Fresh oats",
+    "category": "others",
+    "stock": 79,
+    "cost": 64.96
+  },
+  {
+    "id": 5409,
+    "name": "onion",
+    "description": "Fresh onion",
+    "category": "vegetable",
+    "stock": 84,
+    "cost": 56.23
+  },
+  {
+    "id": 1624,
+    "name": "orange",
+    "description": "Fresh orange",
+    "category": "fruit",
+    "stock": 2,
+    "cost": 87.59
+  },
+  {
+    "id": 5577,
+    "name": "organic_honey",
+    "description": "Fresh organic honey",
+    "category": "others",
+    "stock": 55,
+    "cost": 58.41
+  },
+  {
+    "id": 5175,
+    "name": "organic_milk",
+    "description": "Fresh organic milk",
+    "category": "dairy",
+    "stock": 12,
+    "cost": 45.07
+  },
+  {
+    "id": 3125,
+    "name": "paneer",
+    "description": "Fresh paneer",
+    "category": "dairy",
+    "stock": 54,
+    "cost": 54.3
+  },
+  {
+    "id": 2903,
+    "name": "passionFruit",
+    "description": "Fresh passion fruit",
+    "category": "fruit",
+    "stock": 18,
+    "cost": 31.76
+  },
+  {
+    "id": 7644,
+    "name": "pav_bread",
+    "description": "Fresh pav bread",
+    "category": "breads",
+    "stock": 31,
+    "cost": 72.93
+  },
+  {
+    "id": 8159,
+    "name": "peanut",
+    "description": "Fresh peanut",
+    "category": "others",
+    "stock": 60,
+    "cost": 88.99
+  },
+  {
+    "id": 8689,
+    "name": "penne_pasta",
+    "description": "Fresh penne pasta",
+    "category": "others",
+    "stock": 5,
+    "cost": 12.29
+  },
+  {
+    "id": 6943,
+    "name": "pepper",
+    "description": "Fresh pepper",
+    "category": "others",
+    "stock": 8,
+    "cost": 89.99
+  },
+  {
+    "id": 1716,
+    "name": "pineapple",
+    "description": "Fresh pineapple",
+    "category": "fruit",
+    "stock": 46,
+    "cost": 81.6
+  },
+  {
+    "id": 7103,
+    "name": "pista",
+    "description": "Fresh pista",
+    "category": "others",
+    "stock": 37,
+    "cost": 17.6
+  },
+  {
+    "id": 6911,
+    "name": "pita_bread",
+    "description": "Fresh pita bread",
+    "category": "breads",
+    "stock": 24,
+    "cost": 84.66
+  },
+  {
+    "id": 9248,
+    "name": "pizza_base_bread",
+    "description": "Fresh pizza base bread",
+    "category": "breads",
+    "stock": 76,
+    "cost": 78.83
+  },
+  {
+    "id": 7250,
+    "name": "potato",
+    "description": "Fresh potato",
+    "category": "vegetable",
+    "stock": 47,
+    "cost": 99.37
+  },
+  {
+    "id": 7988,
+    "name": "pumpkin_seeds",
+    "description": "Fresh pumpkin seeds",
+    "category": "others",
+    "stock": 30,
+    "cost": 72.41
+  },
+  {
+    "id": 8256,
+    "name": "quinoa",
+    "description": "Fresh quinoa",
+    "category": "others",
+    "stock": 84,
+    "cost": 48.83
+  },
+  {
+    "id": 8657,
+    "name": "radish",
+    "description": "Fresh radish",
+    "category": "vegetable",
+    "stock": 7,
+    "cost": 56.05
+  },
+  {
+    "id": 2822,
+    "name": "rasin",
+    "description": "Fresh raisin",
+    "category": "others",
+    "stock": 37,
+    "cost": 88.15
+  },
+  {
+    "id": 7333,
+    "name": "roasted_channa",
+    "description": "Fresh roasted channa",
+    "category": "others",
+    "stock": 49,
+    "cost": 82.89
+  },
+  {
+    "id": 9938,
+    "name": "salami",
+    "description": "Fresh salami",
+    "category": "non-veg",
+    "stock": 90,
+    "cost": 81.38
+  },
+  {
+    "id": 5947,
+    "name": "sandwitch_bread",
+    "description": "Fresh sandwich bread",
+    "category": "breads",
+    "stock": 98,
+    "cost": 91.03
+  },
+  {
+    "id": 2335,
+    "name": "saunf",
+    "description": "Fresh saunf",
+    "category": "others",
+    "stock": 66,
+    "cost": 62.01
+  },
+  {
+    "id": 3565,
+    "name": "shrimp",
+    "description": "Fresh shrimp",
+    "category": "non-veg",
+    "stock": 66,
+    "cost": 8.76
+  },
+  {
+    "id": 3370,
+    "name": "sona_masoori_rice",
+    "description": "Fresh sona masoori rice",
+    "category": "others",
+    "stock": 66,
+    "cost": 29.83
+  },
+  {
+    "id": 3108,
+    "name": "sourdough_bread",
+    "description": "Fresh sourdough bread",
+    "category": "breads",
+    "stock": 25,
+    "cost": 1.68
+  },
+  {
+    "id": 8325,
+    "name": "spaghetti_pasta",
+    "description": "Fresh spaghetti pasta",
+    "category": "others",
+    "stock": 9,
+    "cost": 76.99
+  },
+  {
+    "id": 8730,
+    "name": "spinach",
+    "description": "Fresh spinach",
+    "category": "vegetable",
+    "stock": 57,
+    "cost": 19.83
+  },
+  {
+    "id": 9500,
+    "name": "sunflower_seeds",
+    "description": "Fresh sunflower seeds",
+    "category": "others",
+    "stock": 39,
+    "cost": 89.76
+  },
+  {
+    "id": 8650,
+    "name": "tamrind",
+    "description": "Fresh tamrind",
+    "category": "others",
+    "stock": 34,
+    "cost": 12.35
+  },
+  {
+    "id": 7500,
+    "name": "tengra_fish",
+    "description": "Fresh tengra fish",
+    "category": "non-veg",
+    "stock": 9,
+    "cost": 44.94
+  },
+  {
+    "id": 7972,
+    "name": "tofu",
+    "description": "Fresh tofu",
+    "category": "others",
+    "stock": 39,
+    "cost": 72.59
+  },
+  {
+    "id": 8713,
+    "name": "tomato",
+    "description": "Fresh tomato",
+    "category": "vegetable",
+    "stock": 56,
+    "cost": 57.75
+  },
+  {
+    "id": 2023,
+    "name": "tonned_milk",
+    "description": "Fresh tonned milk",
+    "category": "dairy",
+    "stock": 82,
+    "cost": 54.53
+  },
+  {
+    "id": 3548,
+    "name": "toor_dal",
+    "description": "Fresh toor dal",
+    "category": "others",
+    "stock": 30,
+    "cost": 73.65
+  },
+  {
+    "id": 8109,
+    "name": "tuna",
+    "description": "Fresh tuna",
+    "category": "non-veg",
+    "stock": 94,
+    "cost": 76.75
+  },
+  {
+    "id": 1946,
+    "name": "turkey_bacon",
+    "description": "Fresh turkey bacon",
+    "category": "non-veg",
+    "stock": 93,
+    "cost": 24.84
+  },
+  {
+    "id": 7240,
+    "name": "turmeric_powder",
+    "description": "Fresh turmeric powder",
+    "category": "others",
+    "stock": 61,
+    "cost": 87.24
+  },
+  {
+    "id": 2134,
+    "name": "vanilla",
+    "description": "Fresh vanilla",
+    "category": "others",
+    "stock": 64,
+    "cost": 69.49
+  },
+  {
+    "id": 6281,
+    "name": "watermelon",
+    "description": "Fresh watermelon",
+    "category": "fruit",
+    "stock": 75,
+    "cost": 39.3
+  },
+  {
+    "id": 8030,
+    "name": "wheat_bread",
+    "description": "Fresh whole wheat bread",
+    "category": "breads",
+    "stock": 48,
+    "cost": 75.53
+  }
+]

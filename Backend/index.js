@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://root:root@blog.oloxt.mongodb.net/?retryWrites=true&w=majority&appName=blog');
+mongoose.connect('mongodb+srv://root:root@blog.oloxt.mongodb.net/food_ordering_website?retryWrites=true&w=majority&appName=blog');
 
 app.use(express.static("./files/images"));
 
@@ -47,7 +47,15 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
+
+  console.log(username + " : " + password)
+
   const userDoc = await User.findOne({ username });
+
+  if (!userDoc) {
+    return res.status(400).json('wrong Email');
+  }
+
   const passOk = bcrypt.compareSync(password, userDoc.password);
   if (passOk) {
     // logged in
@@ -65,6 +73,11 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', (req, res) => {
   const { token } = req.cookies;
+
+  if (!token) {
+    return res.status(401).json({ message: 'not logged in' });
+  }
+
   jwt.verify(token, secret, {}, (err, info) => {
     if (err) throw err;
     res.json(info);
@@ -132,13 +145,56 @@ app.put('/food', uploadMiddleware.single('file'), async (req, res) => {
 
 app.get('/food', async (req, res) => {
   console.log("GET /food");
-  res.json(
-    await Food.find()
-      .populate('author', ['username'])
-      .sort({ createdAt: -1 })
-      .limit(20)
-  );
+
+  // Get page and limit from query parameters
+  const page = parseInt(req.query.page) || 1; // Default to page 1 if not specified
+  const limit = parseInt(req.query.limit); // No default limit, fetch all items if not specified
+
+  let foodItems;
+
+  try {
+    if (limit) {
+      // If limit is specified, calculate skip and apply pagination
+      const skip = (page - 1) * limit;
+      foodItems = await Food.find().skip(skip).limit(limit);
+    } else {
+      // If no limit is provided, fetch all items
+      foodItems = await Food.find();
+    }
+
+    // Return the response
+    res.json(foodItems);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
+
+app.get('/foodCategories', async (req, res) => {
+  try {
+    const categories = await Food.aggregate([
+      {
+        $group: {
+          _id: "$category",    // Group by category
+          count: { $sum: 1 },  // Count the number of items in each category
+        },
+      },
+      {
+        $project: {
+          _id: 0,              // Hide the default _id field
+          category: "$_id",    // Rename _id to category
+          count: 1,            // Include the count field
+        },
+      },
+    ]);
+
+    res.json(categories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while fetching categories" });
+  }
+});
+
 
 app.get('/Food/:id', async (req, res) => {
   const { id } = req.params;
