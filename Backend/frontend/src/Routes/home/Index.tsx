@@ -68,17 +68,17 @@ const categories = [
   },
   {
     name: 'Breads',
-    image: 'bread_Categories',
+    image: 'bread_categories',
     category: Category.Breads,
   },
   {
     name: 'Dairy',
-    image: 'dairy_Categories',
+    image: 'dairy_categories',
     category: Category.Dairy,
   },
   {
     name: 'Others',
-    image: 'other_Categories',
+    image: 'other_categories',
     category: Category.Others,
   },
 ];
