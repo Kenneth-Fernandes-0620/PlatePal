@@ -2,13 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
 const User = require('./models/User');
-const Food = require('./models/Food');
+const FoodModel = require('./models/Food');
+const Cart = require('./models/Cart');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const fs = require('fs');
+const Order = require('./models/Order');
 
 const uploadMiddleware = multer({ dest: 'uploads/' });
 
@@ -37,25 +39,48 @@ app.get('/health', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
+
+  console.log(email + " : " + password)
+
+  // Basic input validation
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
+
   try {
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email is already taken.' });
+    }
+
+    console.log("Creating user")
+
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const userDoc = await User.create({
-      username,
-      password: bcrypt.hashSync(password, salt),
+      email: email,
+      password: hashedPassword,
     });
-    res.json(userDoc);
+    const token = jwt.sign({ email, id: userDoc._id }, secret, {});
+
+    // Send back the user data and token
+    res.cookie('token', token).json({
+      id: userDoc._id,
+      email,
+    });
   } catch (e) {
     console.log(e);
-    res.status(400).json(e);
+    res.status(500).json({ error: 'User registration failed.' });
   }
 });
 
+
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  console.log(username + " : " + password)
-
-  const userDoc = await User.findOne({ username });
+  const userDoc = await User.findOne({ email });
 
   if (!userDoc) {
     return res.status(400).json('wrong Email');
@@ -64,11 +89,11 @@ app.post('/login', async (req, res) => {
   const passOk = bcrypt.compareSync(password, userDoc.password);
   if (passOk) {
     // logged in
-    jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+    jwt.sign({ email, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
       res.cookie('token', token).json({
         id: userDoc._id,
-        username,
+        email,
       });
     });
   } else {
@@ -76,77 +101,104 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/profile', (req, res) => {
-  const { token } = req.cookies;
+// app.get('/profile', (req, res) => {
+//   const { token } = req.cookies;
 
-  if (!token) {
-    return res.status(401).json({ message: 'not logged in' });
-  }
+//   if (!token) {
+//     return res.status(401).json({ message: 'not logged in' });
+//   }
 
-  jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
-    res.json(info);
-  });
-});
+//   jwt.verify(token, secret, {}, (err, info) => {
+//     if (err) throw err;
+//     res.json(info);
+//   });
+// });
 
 app.post('/logout', (req, res) => {
   res.cookie('token', '').json('ok');
 });
 
-app.post('/food', uploadMiddleware.single('file'), async (req, res) => {
-  const { originalname, path } = req.file;
-  const parts = originalname.split('.');
-  const ext = parts[parts.length - 1];
-  const newPath = path + '.' + ext;
-  fs.renameSync(path, newPath);
+app.post('/cart', async (req, res) => {
+  const { foodId, quantity, name, price } = req.body;
 
-  const { token } = req.cookies;
-  jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
-    const { title, summary, content } = req.body;
-    const foodDoc = await Food.create({
-      title,
-      summary,
-      content,
-      cover: newPath,
-      author: info.id,
-    });
-    res.json(foodDoc);
-  });
-
-});
-
-app.put('/food', uploadMiddleware.single('file'), async (req, res) => {
-  let newPath = null;
-  if (req.file) {
-    const { originalname, path } = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    newPath = path + '.' + ext;
-    fs.renameSync(path, newPath);
+  // Validate inputs
+  if (!foodId || !quantity) {
+    return res.status(400).json({ error: 'foodId, quantity, name and price are required' });
   }
 
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
-    const { id, title, summary, content } = req.body;
-    const foodDoc = await Food.findById(id);
-    const isAuthor = JSON.stringify(foodDoc.author) === JSON.stringify(info.id);
-    if (!isAuthor) {
-      return res.status(400).json('you are not the author');
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+      // Logic to add or update the item in the user's cart
+      const cartItem = await Cart.findOneAndUpdate(
+        { userId: info.id, foodId, name, price }, // Find cart item by userId and foodId
+        { $inc: { quantity } },       // Increment quantity
+        { new: true, upsert: true }   // Create a new entry if it doesn't exist
+      );
+
+      res.json(cartItem);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-
-    await foodDoc.updateOne({
-      title,
-      summary,
-      content,
-      cover: newPath ? newPath : foodDoc.cover,
-    });
-
-    res.json(foodDoc);
   });
-
 });
+
+
+app.get('/cart', async (req, res) => {
+  const { token } = req.cookies;
+
+  console.log(token)
+
+  // Verify the token to get user info
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+      const cartItems = await Cart.find({ userId: info.id }).populate('foodId', 'name price'); // Adjust fields as needed
+
+      console.log(cartItems)
+
+      // Send the items back
+      res.json(cartItems);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+});
+
+app.delete('/cart', async (req, res) => {
+  const { foodId } = req.body;
+
+  // Validate input
+  if (!foodId) {
+    return res.status(400).json({ error: 'foodId is required' });
+  }
+
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+      // Remove the item from the user's cart
+      const deletedItem = await Cart.findOneAndDelete({ userId: info.id, foodId });
+
+      if (!deletedItem) {
+        return res.status(404).json({ error: 'Item not found in cart' });
+      }
+
+      res.json({ message: 'Item removed from cart', deletedItem });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+});
+
+
 
 app.get('/food', async (req, res) => {
   console.log("GET /food");
@@ -161,10 +213,10 @@ app.get('/food', async (req, res) => {
     if (limit) {
       // If limit is specified, calculate skip and apply pagination
       const skip = (page - 1) * limit;
-      foodItems = await Food.find().skip(skip).limit(limit);
+      foodItems = await FoodModel.find().skip(skip).limit(limit);
     } else {
       // If no limit is provided, fetch all items
-      foodItems = await Food.find();
+      foodItems = await FoodModel.find();
     }
 
     // Return the response
@@ -177,7 +229,7 @@ app.get('/food', async (req, res) => {
 
 app.get('/foodCategories', async (req, res) => {
   try {
-    const categories = await Food.aggregate([
+    const categories = await FoodModel.aggregate([
       {
         $group: {
           _id: "$category",    // Group by category
@@ -203,9 +255,53 @@ app.get('/foodCategories', async (req, res) => {
 
 app.get('/Food/:id', async (req, res) => {
   const { id } = req.params;
-  const foodDoc = await Food.findById(id).populate('author', ['username']);
+  const foodDoc = await FoodModel.findById(id).populate('author', ['email']);
   res.json(foodDoc);
 })
+
+
+app.get('/orders', async (req, res) => {
+  const { token } = req.cookies;
+
+  // Verify the token to get user info
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+      const orders = await Order.find({ userId: info.id }); // Filter orders by userId
+      res.json(orders);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+});
+
+
+
+app.post('/orders', async (req, res) => {
+  const { userId, items } = req.body;
+
+  if (!userId || !items || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).send('UserId or items not provided');
+  }
+
+  try {
+    // Create a new order with userId
+    const newOrder = new Order({ userId, items });
+    await newOrder.save();
+
+    // Remove items from the cart
+    await Cart.deleteMany({ userId });
+
+    res.status(201).send('Order placed successfully');
+  } catch (error) {
+    console.error('Error processing order:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+
 
 app.listen(PORT);
 console.log(`Server is running on  http://localhost:${PORT}`);

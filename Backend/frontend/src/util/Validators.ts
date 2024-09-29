@@ -16,7 +16,7 @@ export function validateEmail(email: string): boolean {
  */
 export function validatePassword(password: string) {
   const passwordPattern =
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&.]{8,}$/;
   return passwordPattern.test(password);
 }
 

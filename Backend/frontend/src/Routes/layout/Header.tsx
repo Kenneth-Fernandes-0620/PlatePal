@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-import { IconButton, MenuItem, Menu } from "@mui/material";
+import { IconButton, MenuItem, Menu } from '@mui/material';
 
-import { UserContext } from "./UserContext";
-import { CartContext } from "./CartContext";
-import logo from "../../Assets/logo.jpg";
-
+import { UserContext } from '../../Components/UserContext';
+import { CartContext } from '../../Components/CartContext';
+import logo from '../../Assets/logo.jpg';
 
 export default function Header() {
   const userContext = useContext(UserContext);
@@ -20,7 +19,7 @@ export default function Header() {
   const open = Boolean(anchorEl);
 
   if (!userContext || !cartContext) {
-    throw new Error("UserContext must be used within a UserProvider");
+    throw new Error('UserContext must be used within a UserProvider');
   }
 
   const { userInfo, setUserInfo } = userContext;
@@ -29,27 +28,13 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (anchorEl != null)
-      setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
 
   // Function to handle closing the menu
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-  useEffect(() => {
-    fetch('http://localhost:4000/profile', {
-      credentials: 'include',
-    }).then(response => {
-      response.json().then(userInfo => {
-        setUserInfo(userInfo);
-      });
-    }).catch(err => {
-      console.log(err);
-    });
-  }, []);
 
   function logout() {
     fetch('http://localhost:4000/logout', {
@@ -61,55 +46,81 @@ export default function Header() {
     window.location.reload();
   }
 
-  const username = userInfo?.email;
+  function showOrders() {
+    navigate('/orders');
+  }
+
+  const email = userInfo?.email;
 
   return (
-    <header style={{
-      display: 'flex',
-      background: '#CCC',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingLeft: '50px',
-      paddingRight: '50px',
-    }}>
-      {/* Logo */}
-      <div style={{
+    <header
+      style={{
         display: 'flex',
+        background: '#CCC',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 10
-      }}>
+        paddingLeft: '50px',
+        paddingRight: '50px',
+      }}
+    >
+      {/* Logo */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 10,
+        }}
+      >
         <img src={logo} alt="" height={70} width={70} />
         <h1>
-          <Link to="/" className="logo" style={{ textDecoration: 'None', color: 'black', fontStyle: 'italic' }}>FoodPal</Link>
+          <Link
+            to="/"
+            className="logo"
+            style={{
+              textDecoration: 'None',
+              color: 'black',
+              fontStyle: 'italic',
+            }}
+          >
+            FoodPal
+          </Link>
         </h1>
       </div>
 
-      <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <div>
-          <IconButton aria-label="cart" onClick={() => { navigate("/cart") }}>
-            <ShoppingCartIcon />{cartInfo?.size}
+          <IconButton
+            aria-label="cart"
+            onClick={() => {
+              navigate('/cart');
+            }}
+          >
+            <ShoppingCartIcon />
+            {cartInfo?.size}
           </IconButton>
         </div>
 
         <div>
-          <IconButton aria-label="account" onClick={(e) => {
-            if (username == null) navigate("/login")
-            else
-              handleClick(e);
-          }}
-            onMouseOver={handleClick}
-            onMouseOut={handleClose}
-          // onMouseLeave={handleClose}
-
+          <IconButton
+            aria-label="account"
+            onClick={(e) => {
+              if (email == null) {
+                navigate('/login');
+              } else {
+                handleClick(e);
+              }
+            }}
+            // onMouseLeave={handleClose}
           >
             <AccountCircleIcon />
           </IconButton>
@@ -124,15 +135,11 @@ export default function Header() {
             }}
           >
             {/* Menu items */}
+            <MenuItem onClick={showOrders}>Orders</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </div>
-
       </div>
-
-
-
-
     </header>
   );
 }

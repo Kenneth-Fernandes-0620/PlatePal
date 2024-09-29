@@ -1,53 +1,134 @@
 import React, { forwardRef, useContext, useState } from 'react';
-import { Button } from '@mui/material'; // Importing MUI Button
+import { Button } from '@mui/material';
+import { CartContext } from '../../Components/CartContext';
+import { UserContext } from '../../Components/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-import { CartContext } from '../layout/CartContext';
-
-// Use forwardRef to allow passing a ref to the component
 const FoodItemCard = forwardRef<
   HTMLDivElement,
   { _id: string; title: string; summary: string; price: number }
 >(({ _id, title, summary, price }, ref) => {
-  const [count, setCount] = useState<number>(0);
-  const [hover, setHover] = useState<boolean>(false);
-
   const cartContext = useContext(CartContext);
-
-  if (!cartContext) {
-    throw new Error('UserContext must be used within a UserProvider');
+  const userContext = useContext(UserContext);
+  if (!cartContext || !userContext) {
+    throw new Error('Context must be used within a Provider');
   }
 
-  const { setCartInfo } = cartContext;
+  const { cartInfo, setCartInfo } = cartContext;
+  const { userInfo } = userContext;
 
-  const handleIncrement = () => {
-    setCount((prevCount) => prevCount + 1);
+  const [hover, setHover] = useState<boolean>(false);
+  const count = cartInfo?.get(_id)?.[1] || 0; // Directly use cart value as quantity
+
+  const navigate = useNavigate();
+
+  const handleIncrement = async () => {
+    if (!userInfo?.email) {
+      alert('Please login to add items to cart');
+      navigate('/login');
+      return;
+    }
+
+    const newCount = count + 1;
     setCartInfo((prevCartInfo) => {
-      prevCartInfo!.set(_id, (prevCartInfo!.get(_id) || 0) + 1);
-      return new Map<string, number>(prevCartInfo);
+      prevCartInfo!.set(_id, [title, newCount, price]); // Update with new quantity
+      return new Map<string, [string, number, number]>(prevCartInfo);
     });
+
+    // Make a request to the server to add the item to the user's cart
+    try {
+      const response = await fetch('http://localhost:4000/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: title,
+          foodId: _id,
+          quantity: 1,
+          price,
+        }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      // Revert the cart context change
+      setCartInfo((prevCartInfo) => {
+        prevCartInfo!.set(_id, [title, count, price]); // Reset to previous count
+        return new Map<string, [string, number, number]>(prevCartInfo);
+      });
+    }
   };
 
-  const handleDecrement = () => {
-    if (count !== 0) {
-      setCount((prevCount) => prevCount - 1);
+  const handleDecrement = async () => {
+    if (count > 0) {
+      const newCount = count - 1;
+
       setCartInfo((prevCartInfo) => {
-        if (prevCartInfo!.get(_id) === 1) {
-          prevCartInfo!.delete(_id);
-          return new Map<string, number>(prevCartInfo);
+        if (newCount <= 0) {
+          prevCartInfo!.delete(_id); // Remove from cart
         } else {
-          prevCartInfo!.set(_id, (prevCartInfo!.get(_id) || 0) - 1);
-          return new Map<string, number>(prevCartInfo);
+          prevCartInfo!.set(_id, [title, newCount, price]);
         }
+        return new Map<string, [string, number, number]>(prevCartInfo);
       });
+
+      // Make a request to the server
+      try {
+        if (newCount === 0) {
+          // Call delete endpoint if count is 0
+          const response = await fetch('http://localhost:4000/cart', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              foodId: _id,
+            }),
+            credentials: 'include',
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+        } else {
+          // Otherwise update the quantity
+          const response = await fetch('http://localhost:4000/cart', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: title,
+              foodId: _id,
+              quantity: -1, // Decrementing the quantity
+            }),
+            credentials: 'include',
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+        }
+      } catch (error) {
+        console.error('Error updating item in cart:', error);
+        // Revert the cart context change if there's an error
+        setCartInfo((prevCartInfo) => {
+          prevCartInfo!.set(_id, [title, count, price]); // Reset to previous count
+          return new Map<string, [string, number, number]>(prevCartInfo);
+        });
+      }
     }
   };
 
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
 
-  // console.log(cartInfo?.size);
-
-  let cleanedTitle = title.replace("_", ' ');
+  let cleanedTitle = title.replace('_', ' ');
   cleanedTitle = cleanedTitle.charAt(0).toUpperCase() + cleanedTitle.slice(1);
 
   return (
@@ -66,23 +147,20 @@ const FoodItemCard = forwardRef<
       <img
         src={`http://localhost:4000/food_images/${title}.jpg`}
         style={{
-          borderRadius: '8px 8px 0px 0px', // Rounded corners (Parent Border Radius - Parent Border Width)
+          borderRadius: '8px 8px 0px 0px',
         }}
         width={'100%'}
         height={200}
         alt={title}
       />
-      <div
-        style={{
-          paddingLeft: '10px',
-          paddingRight: '10px',
-        }}
-      >
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+      <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <p
             style={{
               textAlign: 'left',
@@ -96,16 +174,11 @@ const FoodItemCard = forwardRef<
           <p>₹{price}</p>
         </div>
         <p
-          style={{
-            textAlign: 'left',
-            marginTop: '0px',
-            marginBottom: '10px',
-          }}
+          style={{ textAlign: 'left', marginTop: '0px', marginBottom: '10px' }}
         >
           {summary}
         </p>
 
-        {/* Add to Cart Button */}
         <div
           style={{
             display: 'flex',

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import img from '../../../Assets/Group 23.png';
+import img from '../../../Assets/login.png';
 import { validateEmail, validatePassword } from '../../../util/Validators';
+import { UserContext } from '../../../Components/UserContext';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
@@ -13,6 +14,14 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const context = useContext(UserContext);
+
+  if (!context) {
+    throw new Error('SomeComponent must be used within a UserContextProvider');
+  }
+
+  const { setUserInfo } = context;
+
   function togglePasswordVisibility(): void {
     setShowPassword(!showPassword);
   }
@@ -21,14 +30,16 @@ const LoginPage: React.FC = () => {
     const emailValidationResult = validateEmail(email);
 
     if (!emailValidationResult) {
-      alert('Invalid email');
+      alert('Invalid email, check it again');
       return;
     }
 
     const passwordValidationResult = validatePassword(password);
 
     if (!passwordValidationResult) {
-      alert('Invalid password');
+      alert(
+        'Invalid password, it should be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number and one special character',
+      );
       return;
     }
 
@@ -37,21 +48,22 @@ const LoginPage: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username: email, password }),
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
     })
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error('Email or password is Wrong');
+        throw new Error('Email or password is Wrong, or does not exist');
       })
       .then((data) => {
-        console.log(data);
+        setUserInfo(data);
+        navigate('/');
       })
       .catch((error) => {
-        if (error.message === 'Email or password is Wrong') {
-          alert(error.message);
-        }
+        alert(error.message);
+
         console.error(error);
       });
   }

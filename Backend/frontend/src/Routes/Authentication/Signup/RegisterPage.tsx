@@ -1,14 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import img from '../../../Assets/Group 23.png';
+import img from '../../../Assets/login.png';
 import {
   validateEmail,
   validatePassword,
   validateRepeatPassword,
 } from '../../../util/Validators';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { UserContext } from '../../../Components/UserContext';
 
 const RegisterPage: FC = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +21,14 @@ const RegisterPage: FC = () => {
 
   const navigate = useNavigate();
 
+  const context = useContext(UserContext);
+
+  if (!context) {
+    throw new Error('SomeComponent must be used within a UserContextProvider');
+  }
+
+  const { setUserInfo } = context;
+
   function togglePasswordVisibility(): void {
     setShowPassword(!showPassword);
   }
@@ -28,7 +37,7 @@ const RegisterPage: FC = () => {
     setShowRepeatPassword(!showRepeatPassword);
   }
 
-  function handleLogin() {
+  function handleRegister() {
     const emailValidationResult = validateEmail(email);
 
     if (!emailValidationResult) {
@@ -58,22 +67,22 @@ const RegisterPage: FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username: email, password }),
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
     })
       .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('Email or password is Wrong');
+        return response.json();
       })
       .then((data) => {
-        console.log(data);
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        setUserInfo(data);
+        alert('User Registered Successfully');
+        navigate('/');
       })
       .catch((error) => {
-        if (error.message === 'Email or password is Wrong') {
-          alert(error.message);
-        }
-        console.error(error);
+        alert(error.message);
       });
   }
 
@@ -171,7 +180,7 @@ const RegisterPage: FC = () => {
               {showRepeatPassword ? <VisibilityOff /> : <Visibility />}
             </Button>
           </div>
-          <Button type="button" variant="contained" onClick={handleLogin}>
+          <Button type="button" variant="contained" onClick={handleRegister}>
             Sign In
           </Button>
         </div>
