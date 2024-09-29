@@ -12,7 +12,7 @@ const fs = require('fs');
 
 const uploadMiddleware = multer({ dest: 'uploads/' });
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
