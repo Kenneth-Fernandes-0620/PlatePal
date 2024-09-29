@@ -112,9 +112,14 @@ const Cart: React.FC = () => {
         throw new Error('Failed to place order');
       }
 
+      console.log(response);
+
+      const result = await response.json();
+
       // Clear the cart after successful order placement
       setCartInfo(new Map());
-      alert('Order placed successfully!');
+      console.log(result);
+      alert(`Order placed successfully!, Order ID: ${result._id}`);
     } catch (error) {
       const errorMessage =
         error instanceof Error

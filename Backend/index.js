@@ -26,7 +26,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.connect(`mongodb+srv://root:${process.env.MONGODB_PASS}@blog.oloxt.mongodb.net/food_ordering_website?retryWrites=true&w=majority&appName=blog`);
 
@@ -287,7 +286,7 @@ app.post('/api/orders', async (req, res) => {
     await newOrder.save();
     await Cart.deleteMany({ userId });
 
-    res.status(201).send('Order placed successfully');
+    res.status(201).json(newOrder);
   } catch (error) {
     console.error('Error processing order:', error);
     res.status(500).send('Internal server error');

@@ -47,7 +47,7 @@ const styles = {
 const categories = [
   {
     name: 'All',
-    image: 'All_Categories',
+    image: 'All_categories',
     color: '#FEEFEA',
     category: Category.All,
   },
@@ -129,8 +129,6 @@ export default function IndexPage() {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          console.log('Visible');
-          // fetchMorePosts();
           setPage(page + 1);
         }
       });
