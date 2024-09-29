@@ -24,10 +24,15 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.connect(`mongodb+srv://root:${process.env.MONGODB_PASS}@blog.oloxt.mongodb.net/food_ordering_website?retryWrites=true&w=majority&appName=blog`);
 
-app.use(express.static("./files/images"));
+app.use(express.static("./public/images"));
+app.use(express.static("./build"));
 
 // Health check
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+app.get('/health', (req, res) => {
   res.json({ message: 'ok' });
 })
 
