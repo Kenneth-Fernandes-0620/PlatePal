@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const FoodItemCard = forwardRef<
   HTMLDivElement,
-  { _id: string; title: string; summary: string; price: number }
->(({ _id, title, summary, price }, ref) => {
+  { _id: string; title: string; summary: string; price: number; stock: number }
+>(({ _id, title, summary, price, stock }, ref) => {
   const cartContext = useContext(CartContext);
   const userContext = useContext(UserContext);
   if (!cartContext || !userContext) {
@@ -25,7 +25,14 @@ const FoodItemCard = forwardRef<
   const handleIncrement = async () => {
     if (!userInfo?.email) {
       alert('Please login to add items to cart');
-      navigate('/login');
+      navigate('/login', {
+        state: { redirect: '/' },
+      });
+      return;
+    }
+
+    if (count + 1 > stock) {
+      alert('Cannot add more items to cart');
       return;
     }
 

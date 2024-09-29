@@ -279,6 +279,7 @@ export default function IndexPage() {
                     title={foodItem.name}
                     summary={foodItem.description}
                     price={foodItem.cost}
+                    stock={foodItem.stock}
                   />
                 );
               } else {
@@ -290,6 +291,7 @@ export default function IndexPage() {
                     title={foodItem.name}
                     summary={foodItem.description}
                     price={foodItem.cost}
+                    stock={foodItem.stock}
                   />
                 );
               }

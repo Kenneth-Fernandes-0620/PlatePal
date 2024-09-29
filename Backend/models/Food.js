@@ -9,7 +9,7 @@ const FoodItem = new Schema(
     url: String,
     // category(All, Fruit, Vegetable, Non- veg, Breads, Diary, etc): Enum
     review_id: String,
-    stock_available: Number,
+    stock: Number,
     cost: Number,
   },
   {

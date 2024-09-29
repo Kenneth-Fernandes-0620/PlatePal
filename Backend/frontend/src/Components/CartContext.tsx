@@ -12,7 +12,7 @@ interface CartContextProviderProps {
 }
 
 interface CartContextType {
-  cartInfo: Map<string, [string, number, number]> | null;
+  cartInfo: Map<string, [string, number, number]> | null; // id: [name, quantity, price]
   setCartInfo: React.Dispatch<
     React.SetStateAction<Map<string, [string, number, number]> | null>
   >;
@@ -48,7 +48,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         }
 
         const data = await response.json();
-        const itemsMap = new Map<string, [string, number, number]>(); // id: name, quantity, price
+        const itemsMap = new Map<string, [string, number, number]>();
 
         data.forEach(
           (item: {

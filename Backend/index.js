@@ -21,6 +21,7 @@ const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 app.use(cors({
   credentials: true,
+  origin: 'http://localhost:3000',
 }));
 
 app.use(express.json());
@@ -225,9 +226,9 @@ app.get('/api/foodCategories', async (req, res) => {
       },
       {
         $project: {
-          _id: 0,              // Hide the default _id field
-          category: "$_id",    // Rename _id to category
-          count: 1,            // Include the count field
+          _id: 0,
+          category: "$_id",
+          count: 1,
         },
       },
     ]);
@@ -267,11 +268,23 @@ app.post('/api/orders', async (req, res) => {
   }
 
   try {
-    // Create a new order with userId
     const newOrder = new Order({ userId, items });
-    await newOrder.save();
+    for (const item of items) {
+      const { foodId, quantity } = item;
+      const foodItem = await FoodModel.findById(foodId);
+      if (!foodItem) {
+        return res.status(404).send(`Food item with ID ${foodId} not found`);
+      }
 
-    // Remove items from the cart
+      if (foodItem.stock < quantity) {
+        return res.status(400).send(`Insufficient stock for food item ${foodId}`);
+      }
+
+      foodItem.stock -= quantity;
+      await foodItem.save();
+    }
+
+    await newOrder.save();
     await Cart.deleteMany({ userId });
 
     res.status(201).send('Order placed successfully');
@@ -282,6 +295,50 @@ app.post('/api/orders', async (req, res) => {
 });
 
 
+
+app.post('/api/validate-stock', async (req, res) => {
+  const { items } = req.body;
+
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).send('Items not provided');
+  }
+
+  const { token } = req.cookies;
+
+  // Verify the token to ensure the user is authenticated
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+      const productIds = items.map(item => item.foodId);
+      const products = await FoodModel.find({ _id: { $in: productIds } });
+
+      const stockIssues = [];
+
+      // Check stock for each item
+      for (const item of items) {
+        const product = products.find(p => p._id.toString() === item.foodId);
+
+        if (!product) {
+          stockIssues.push(`Product not found for ID: ${item.foodId}`);
+          continue;
+        }
+        if (product.stock < item.quantity) {
+          stockIssues.push(`Insufficient stock for product ID: ${item.foodId}`);
+        }
+      }
+
+      if (stockIssues.length > 0) {
+        return res.status(400).json({ errors: stockIssues });
+      }
+
+      res.status(200).send('Stock is sufficient for all items');
+    } catch (error) {
+      console.error('Error validating stock:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
+});
 
 app.listen(PORT);
 console.log(`Server is running on Port:${PORT}`);

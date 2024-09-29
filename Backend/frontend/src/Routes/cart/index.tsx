@@ -67,12 +67,7 @@ const Cart: React.FC = () => {
   const handlePayNow = async () => {
     try {
       // Gather order items from the cart
-      const orderItems: {
-        foodId: string;
-        name: string;
-        quantity: number;
-        price: number;
-      }[] = Array.from(cartInfo!.entries()).map(
+      const orderItems = Array.from(cartInfo!.entries()).map(
         ([foodId, [name, quantity, price]]) => ({
           foodId,
           name,
@@ -83,6 +78,27 @@ const Cart: React.FC = () => {
 
       const userId = userInfo?.id; // Ensure user ID is available
 
+      // Validate stock before placing the order
+      const validationResponse = await fetch(
+        `${window.location.origin}/api/validate-stock`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ items: orderItems }),
+          credentials: 'include',
+        },
+      );
+
+      if (!validationResponse.ok) {
+        const validationErrors = await validationResponse.json();
+        throw new Error(
+          `Stock validation failed: ${validationErrors.errors.join(', ')}`,
+        );
+      }
+
+      // Proceed to place the order if stock is sufficient
       const response = await fetch(`${window.location.origin}/api/orders`, {
         method: 'POST',
         headers: {
@@ -100,8 +116,11 @@ const Cart: React.FC = () => {
       setCartInfo(new Map());
       alert('Order placed successfully!');
     } catch (error) {
-      console.error('Error placing order:', error);
-      alert('There was an issue placing your order. Please try again.');
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'There was an issue placing your order. Please try again.';
+      alert(errorMessage);
     }
   };
 
@@ -154,7 +173,7 @@ const Cart: React.FC = () => {
             onClick={handlePayNow}
             style={{ marginTop: '20px' }}
           >
-            Pay Now
+            Pay and Order
           </Button>
         </div>
       )}
