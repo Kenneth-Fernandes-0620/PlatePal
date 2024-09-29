@@ -17,18 +17,18 @@ const PORT = 4000;
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://root:root@blog.oloxt.mongodb.net/food_ordering_website?retryWrites=true&w=majority&appName=blog');
+mongoose.connect(`mongodb+srv://root:${process.env.MONGODB_PASS}@blog.oloxt.mongodb.net/food_ordering_website?retryWrites=true&w=majority&appName=blog`);
 
 app.use(express.static("./files/images"));
 
 // Health check
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello World!' });
+  res.json({ message: 'ok' });
 })
 
 app.post('/register', async (req, res) => {
