@@ -62,7 +62,7 @@ const RegisterPage: FC = () => {
       return;
     }
 
-    fetch('http://localhost:4000/register', {
+    fetch(`${window.location.origin}/api/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

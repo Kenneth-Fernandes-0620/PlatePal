@@ -49,7 +49,7 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await fetch('http://localhost:4000/orders', {
+      const response = await fetch(`${window.location.origin}/api/orders`, {
         credentials: 'include',
       });
 

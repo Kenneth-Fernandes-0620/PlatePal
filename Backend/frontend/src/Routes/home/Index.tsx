@@ -8,7 +8,7 @@ import FoodItemCard from './FoodItemCard';
 import CategoryItem from './CategoryItem';
 import { Category } from '../../Components/classes/Category';
 
-import externalStyles from "./styles.module.css";
+import externalStyles from './styles.module.css';
 
 const styles = {
   form: {
@@ -141,7 +141,7 @@ export default function IndexPage() {
 
   // Load the food categories Count on the first render
   useEffect(() => {
-    fetch(`http://localhost:4000/foodCategories`, {
+    fetch(`${window.location.origin}/api/foodCategories`, {
       credentials: 'include',
       method: 'GET',
       headers: {
@@ -156,7 +156,7 @@ export default function IndexPage() {
             categoryCountMap.set(category.category, category.count);
             categoryAll += category.count;
           });
-          categoryCountMap.set("all", categoryAll);
+          categoryCountMap.set('all', categoryAll);
           setCategoryCount(categoryCountMap);
         });
       })
@@ -170,7 +170,7 @@ export default function IndexPage() {
 
     setLoading(true);
     fetch(
-      `http://localhost:4000/food?page=${page}&limit=${MAX_ITEMS_PER_LOAD}`,
+      `${window.location.origin}/api/food?page=${page}&limit=${MAX_ITEMS_PER_LOAD}`,
       {
         credentials: 'include',
         method: 'GET',
@@ -201,10 +201,7 @@ export default function IndexPage() {
   }, [page]);
 
   return (
-    <div
-      style={{
-      }}
-    >
+    <div style={{}}>
       <div
         style={{
           display: 'flex',
@@ -250,55 +247,54 @@ export default function IndexPage() {
         ))}
       </div>
 
-      <div
-        className={externalStyles.foodItemsGrid}
-      >
+      <div className={externalStyles.foodItemsGrid}>
         {foodItems &&
-          foodItems
-            .filter(
-              (foodItem) =>
-                categoryFilter === 'All' ||
-                foodItem.category === categoryFilter.toString().toLowerCase(),
-            )
-            .filter(
-              (foodItem) =>
-                foodItem.name.toLowerCase().includes(query.toLowerCase()),
-            ).length === 0 ? (
-          <h1>No Items Found</h1>
-        ) : (foodItems
-          ?.filter(
+        foodItems
+          .filter(
             (foodItem) =>
               categoryFilter === 'All' ||
-              foodItem.category ===
-              categoryFilter.toString().toLocaleLowerCase(),
-          ).filter(
-            (foodItem) =>
-              foodItem.name.toLowerCase().includes(query.toLowerCase()),
+              foodItem.category === categoryFilter.toString().toLowerCase(),
           )
-          .map((foodItem, index) => {
-            if (index === foodItems.length - 1) {
-              return (
-                <FoodItemCard
-                  key={foodItem._id}
-                  _id={foodItem._id}
-                  title={foodItem.name}
-                  summary={foodItem.description}
-                  price={foodItem.cost}
-                />
-              );
-            } else {
-              return (
-                <FoodItemCard
-                  ref={lastFoodElementRef}
-                  key={foodItem._id}
-                  _id={foodItem._id}
-                  title={foodItem.name}
-                  summary={foodItem.description}
-                  price={foodItem.cost}
-                />
-              );
-            }
-          }))}
+          .filter((foodItem) =>
+            foodItem.name.toLowerCase().includes(query.toLowerCase()),
+          ).length === 0 ? (
+          <h1>No Items Found</h1>
+        ) : (
+          foodItems
+            ?.filter(
+              (foodItem) =>
+                categoryFilter === 'All' ||
+                foodItem.category ===
+                  categoryFilter.toString().toLocaleLowerCase(),
+            )
+            .filter((foodItem) =>
+              foodItem.name.toLowerCase().includes(query.toLowerCase()),
+            )
+            .map((foodItem, index) => {
+              if (index === foodItems.length - 1) {
+                return (
+                  <FoodItemCard
+                    key={foodItem._id}
+                    _id={foodItem._id}
+                    title={foodItem.name}
+                    summary={foodItem.description}
+                    price={foodItem.cost}
+                  />
+                );
+              } else {
+                return (
+                  <FoodItemCard
+                    ref={lastFoodElementRef}
+                    key={foodItem._id}
+                    _id={foodItem._id}
+                    title={foodItem.name}
+                    summary={foodItem.description}
+                    price={foodItem.cost}
+                  />
+                );
+              }
+            })
+        )}
       </div>
     </div>
   );

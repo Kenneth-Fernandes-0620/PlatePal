@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
       return;
     }
 
-    fetch('http://localhost:4000/login', {
+    fetch(`${window.location.origin}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,6 +54,9 @@ const LoginPage: React.FC = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
+        }
+        if (response.status === 404) {
+          throw new Error('Check Internet Connection or Server might be Down');
         }
         throw new Error('Email or password is Wrong, or does not exist');
       })

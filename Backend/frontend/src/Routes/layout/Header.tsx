@@ -37,7 +37,7 @@ export default function Header() {
   };
 
   function logout() {
-    fetch('http://localhost:4000/logout', {
+    fetch(`${window.location.origin}/api/logout`, {
       credentials: 'include',
       method: 'POST',
     });

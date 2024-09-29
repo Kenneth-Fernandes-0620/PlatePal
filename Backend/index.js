@@ -19,7 +19,10 @@ const PORT = process.env.PORT || 4000;
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
-app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
+app.use(cors({
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -38,7 +41,7 @@ app.get('/health', (req, res) => {
   res.json({ message: 'ok' });
 })
 
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   const { email, password } = req.body;
 
   console.log(email + " : " + password)
@@ -63,21 +66,22 @@ app.post('/register', async (req, res) => {
       email: email,
       password: hashedPassword,
     });
-    const token = jwt.sign({ email, id: userDoc._id }, secret, {});
 
-    // Send back the user data and token
-    res.cookie('token', token).json({
-      id: userDoc._id,
-      email,
+    jwt.sign({ email, id: userDoc._id }, secret, {}, (err, token) => {
+      if (err) throw err;
+      res.cookie('token', token).json({
+        id: userDoc._id,
+        email,
+      });
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(500).json({ error: 'User registration failed.' });
   }
 });
 
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   const userDoc = await User.findOne({ email });
@@ -101,24 +105,12 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// app.get('/profile', (req, res) => {
-//   const { token } = req.cookies;
 
-//   if (!token) {
-//     return res.status(401).json({ message: 'not logged in' });
-//   }
-
-//   jwt.verify(token, secret, {}, (err, info) => {
-//     if (err) throw err;
-//     res.json(info);
-//   });
-// });
-
-app.post('/logout', (req, res) => {
+app.post('/api/logout', (req, res) => {
   res.cookie('token', '').json('ok');
 });
 
-app.post('/cart', async (req, res) => {
+app.post('/api/cart', async (req, res) => {
   const { foodId, quantity, name, price } = req.body;
 
   // Validate inputs
@@ -147,10 +139,8 @@ app.post('/cart', async (req, res) => {
 });
 
 
-app.get('/cart', async (req, res) => {
+app.get('/api/cart', async (req, res) => {
   const { token } = req.cookies;
-
-  console.log(token)
 
   // Verify the token to get user info
   jwt.verify(token, secret, {}, async (err, info) => {
@@ -158,8 +148,6 @@ app.get('/cart', async (req, res) => {
 
     try {
       const cartItems = await Cart.find({ userId: info.id }).populate('foodId', 'name price'); // Adjust fields as needed
-
-      console.log(cartItems)
 
       // Send the items back
       res.json(cartItems);
@@ -170,7 +158,7 @@ app.get('/cart', async (req, res) => {
   });
 });
 
-app.delete('/cart', async (req, res) => {
+app.delete('/api/cart', async (req, res) => {
   const { foodId } = req.body;
 
   // Validate input
@@ -200,8 +188,7 @@ app.delete('/cart', async (req, res) => {
 
 
 
-app.get('/food', async (req, res) => {
-  console.log("GET /food");
+app.get('/api/food', async (req, res) => {
 
   // Get page and limit from query parameters
   const page = parseInt(req.query.page) || 1; // Default to page 1 if not specified
@@ -227,7 +214,7 @@ app.get('/food', async (req, res) => {
   }
 });
 
-app.get('/foodCategories', async (req, res) => {
+app.get('/api/foodCategories', async (req, res) => {
   try {
     const categories = await FoodModel.aggregate([
       {
@@ -253,14 +240,7 @@ app.get('/foodCategories', async (req, res) => {
 });
 
 
-app.get('/Food/:id', async (req, res) => {
-  const { id } = req.params;
-  const foodDoc = await FoodModel.findById(id).populate('author', ['email']);
-  res.json(foodDoc);
-})
-
-
-app.get('/orders', async (req, res) => {
+app.get('/api/orders', async (req, res) => {
   const { token } = req.cookies;
 
   // Verify the token to get user info
@@ -279,7 +259,7 @@ app.get('/orders', async (req, res) => {
 
 
 
-app.post('/orders', async (req, res) => {
+app.post('/api/orders', async (req, res) => {
   const { userId, items } = req.body;
 
   if (!userId || !items || !Array.isArray(items) || items.length === 0) {
@@ -304,4 +284,4 @@ app.post('/orders', async (req, res) => {
 
 
 app.listen(PORT);
-console.log(`Server is running on  http://localhost:${PORT}`);
+console.log(`Server is running on Port:${PORT}`);

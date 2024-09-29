@@ -25,7 +25,7 @@ const Cart: React.FC = () => {
 
   const handleRemoveItem = async (foodId: string) => {
     try {
-      const response = await fetch('http://localhost:4000/cart', {
+      const response = await fetch(`${window.location.origin}/api/cart`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Cart: React.FC = () => {
 
       const userId = userInfo?.id; // Ensure user ID is available
 
-      const response = await fetch('http://localhost:4000/orders', {
+      const response = await fetch(`${window.location.origin}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const Cart: React.FC = () => {
               <ListItem key={foodId}>
                 <ListItemAvatar>
                   <Avatar
-                    src={`http://localhost:4000/food_images/${name}.jpg`}
+                    src={`${window.location.origin}/food_images/${name}.jpg`}
                     alt={name}
                   />
                 </ListItemAvatar>

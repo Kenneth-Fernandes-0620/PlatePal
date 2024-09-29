@@ -37,7 +37,7 @@ const FoodItemCard = forwardRef<
 
     // Make a request to the server to add the item to the user's cart
     try {
-      const response = await fetch('http://localhost:4000/cart', {
+      const response = await fetch(`${window.location.origin}/api/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const FoodItemCard = forwardRef<
       try {
         if (newCount === 0) {
           // Call delete endpoint if count is 0
-          const response = await fetch('http://localhost:4000/cart', {
+          const response = await fetch(`${window.location.origin}/api/cart`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const FoodItemCard = forwardRef<
           }
         } else {
           // Otherwise update the quantity
-          const response = await fetch('http://localhost:4000/cart', {
+          const response = await fetch(`${window.location.origin}/api/cart`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ const FoodItemCard = forwardRef<
       }}
     >
       <img
-        src={`http://localhost:4000/food_images/${title}.jpg`}
+        src={`${window.location.origin}/food_images/${title}.jpg`}
         style={{
           borderRadius: '8px 8px 0px 0px',
         }}

@@ -39,7 +39,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   useEffect(() => {
     const loadCartData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/cart', {
+        const response = await fetch(`${window.location.origin}/api/cart`, {
           credentials: 'include',
         });
 
