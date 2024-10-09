@@ -47,7 +47,7 @@ const styles = {
 const categories = [
   {
     name: 'All',
-    image: 'All_categories',
+    image: 'all_categories',
     color: '#FEEFEA',
     category: Category.All,
   },
