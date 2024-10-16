@@ -1,0 +1,128 @@
+-Fruits (12)
+Apple
+Banana
+Orange
+Mango
+Pineapple
+Grapes
+Kiwi
+Blueberry
+Watermelon
+Ice Apple
+Custard Apple
+Passion Fruit
+
+-Vegetables (15)
+Carrot
+Broccoli
+Spinach
+Tomato
+Bell Pepper
+Cucumber
+Cauliflower
+Zucchini
+Eggplant
+Potato
+Onion
+Corn
+Beans
+Beetroot
+Radish
+
+-Non-Vegetarian (13)
+Chicken
+Bombay Duck Fish
+Bata Fish
+Tengra Fish
+Chicken Sausage
+Chicken Malai Tikka
+Chicken Liver
+Salami
+Dried Fish
+Shrimp
+Turkey Bacon
+Lamb/ Goat
+Tuna
+
+-Breads (18)
+Milk Bread
+Sandwich Bread
+Multigrain Bread
+Whole Wheat Bread
+Digestive Wheat Bread
+Kulcha Bread
+Multi Protein Bread
+Fruit Bread
+Garlic Bread 
+Sourdough
+Fourgrain Sourdough
+Whole Wheat Bread
+Pizza Bread
+Pita Bread
+Pav Bread
+Banana Bread
+Bun
+Croissant
+
+-Dairy (21)
+Tonned Milk
+Organic Milk
+Cheese Cubes
+Cheese Slices
+Cheese Blend
+Cream Cheese
+Cheese Spread
+Cheese Block
+Feta Cheese
+Greek Yogurt
+Fruit Flavored Yogurt
+Butter Salted
+Butter Unsalted
+Cream
+Fresh Cream
+Cottage Cheese/ Paneer
+Choco chip Ice Cream
+Dry Fruit Ice Cream
+Mango Ice Cream
+Vanilla Ice Cream
+Chocolate Brownie Ice Cream
+
+-Other (38)
+Masoori Rice
+Kolum Rice
+Long Grain Rice
+Basmati Rice
+Sona Masoori Rice
+Penne Pasta
+Spaghetti Pasta
+Fusilli Pasta
+Macaroni Pasta
+Quinoa
+Oats
+Arhad Dal
+Toor Dal
+Moong Dal
+Channa Dal
+Masoor Dal
+Dal Mix
+Dry Fruit Mix
+Peanut
+Makhana/ Fox Nuts
+Almonds
+Pistachio
+Walnut
+Raisin
+Roasted Channa
+Pumpkin Seeds
+Chia Seeds
+Organic Honey
+Honey
+Tofu
+Chili Powder
+Hing
+Turmeric Powder
+Jeera Powder
+Pepper
+Jeera
+Saunf/ Fennel Seeds
+Tamrind
