@@ -49,7 +49,13 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch cart data');
+          const errorText = await response.text();
+          if (response.status === 401) {
+            return;
+          }
+          throw new Error(
+            `Failed to fetch cart data, ${response.status} - ${errorText}`,
+          );
         }
 
         const data = await response.json();
