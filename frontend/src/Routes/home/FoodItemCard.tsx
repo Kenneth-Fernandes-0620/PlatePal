@@ -4,6 +4,11 @@ import { CartContext } from '../../Components/CartContext';
 import { UserContext } from '../../Components/UserContext';
 import { useNavigate } from 'react-router-dom';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 const FoodItemCard = forwardRef<
   HTMLDivElement,
   { _id: string; title: string; summary: string; price: number; stock: number }
@@ -44,7 +49,7 @@ const FoodItemCard = forwardRef<
 
     // Make a request to the server to add the item to the user's cart
     try {
-      const response = await fetch(`${window.location.origin}/api/cart`, {
+      const response = await fetch(`${host}/api/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +93,7 @@ const FoodItemCard = forwardRef<
       try {
         if (newCount === 0) {
           // Call delete endpoint if count is 0
-          const response = await fetch(`${window.location.origin}/api/cart`, {
+          const response = await fetch(`${host}/api/cart`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -104,7 +109,7 @@ const FoodItemCard = forwardRef<
           }
         } else {
           // Otherwise update the quantity
-          const response = await fetch(`${window.location.origin}/api/cart`, {
+          const response = await fetch(`${host}/api/cart`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -152,7 +157,7 @@ const FoodItemCard = forwardRef<
       }}
     >
       <img
-        src={`${window.location.origin}/food_images/${title}.jpg`}
+        src={`${host}/food_images/${title}.jpg`}
         style={{
           borderRadius: '8px 8px 0px 0px',
         }}

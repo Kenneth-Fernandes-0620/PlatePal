@@ -6,6 +6,11 @@ import img from '../../../Assets/login.png';
 import { validateEmail, validatePassword } from '../../../util/Validators';
 import { UserContext } from '../../../Components/UserContext';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -43,7 +48,7 @@ const LoginPage: React.FC = () => {
       return;
     }
 
-    fetch(`${window.location.origin}/api/login`, {
+    fetch(`${host}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

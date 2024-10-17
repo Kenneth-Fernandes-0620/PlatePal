@@ -22,6 +22,11 @@ export const CartContext = createContext<CartContextType | undefined>(
   undefined,
 );
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartInfo, setCartInfo] = useState<Map<
     string,
@@ -39,7 +44,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   useEffect(() => {
     const loadCartData = async () => {
       try {
-        const response = await fetch(`${window.location.origin}/api/cart`, {
+        const response = await fetch(`${host}/api/cart`, {
           credentials: 'include',
         });
 

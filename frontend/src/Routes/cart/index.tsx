@@ -12,6 +12,11 @@ import {
 import { CartContext } from '../../Components/CartContext';
 import { UserContext } from '../../Components/UserContext';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 const Cart: React.FC = () => {
   const cartContext = useContext(CartContext);
   const userContext = useContext(UserContext);
@@ -25,7 +30,7 @@ const Cart: React.FC = () => {
 
   const handleRemoveItem = async (foodId: string) => {
     try {
-      const response = await fetch(`${window.location.origin}/api/cart`, {
+      const response = await fetch(`${host}/api/cart`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -79,17 +84,14 @@ const Cart: React.FC = () => {
       const userId = userInfo?.id; // Ensure user ID is available
 
       // Validate stock before placing the order
-      const validationResponse = await fetch(
-        `${window.location.origin}/api/validate-stock`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ items: orderItems }),
-          credentials: 'include',
+      const validationResponse = await fetch(`${host}/api/validate-stock`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({ items: orderItems }),
+        credentials: 'include',
+      });
 
       if (!validationResponse.ok) {
         const validationErrors = await validationResponse.json();
@@ -99,7 +101,7 @@ const Cart: React.FC = () => {
       }
 
       // Proceed to place the order if stock is sufficient
-      const response = await fetch(`${window.location.origin}/api/orders`, {
+      const response = await fetch(`${host}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,10 +142,7 @@ const Cart: React.FC = () => {
             ([foodId, [name, quantity, price]]) => (
               <ListItem key={foodId}>
                 <ListItemAvatar>
-                  <Avatar
-                    src={`${window.location.origin}/food_images/${name}.jpg`}
-                    alt={name}
-                  />
+                  <Avatar src={`${host}/food_images/${name}.jpg`} alt={name} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={name.charAt(0).toUpperCase() + name.slice(1)}

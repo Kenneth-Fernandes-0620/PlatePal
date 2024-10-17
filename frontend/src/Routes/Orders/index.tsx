@@ -10,6 +10,11 @@ import {
 import { UserContext } from '../../Components/UserContext';
 import { useNavigate } from 'react-router-dom';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 /**
  * The interface for the order item
  */
@@ -49,7 +54,7 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await fetch(`${window.location.origin}/api/orders`, {
+      const response = await fetch(`${host}/api/orders`, {
         credentials: 'include',
       });
 

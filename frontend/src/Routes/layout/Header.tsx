@@ -11,6 +11,11 @@ import { UserContext } from '../../Components/UserContext';
 import { CartContext } from '../../Components/CartContext';
 import logo from '../../Assets/logo.jpg';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 export default function Header() {
   const userContext = useContext(UserContext);
   const cartContext = useContext(CartContext);
@@ -37,7 +42,7 @@ export default function Header() {
   };
 
   function logout() {
-    fetch(`${window.location.origin}/api/logout`, {
+    fetch(`${host}/api/logout`, {
       credentials: 'include',
       method: 'POST',
     });

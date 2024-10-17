@@ -12,16 +12,15 @@ const multer = require('multer');
 const fs = require('fs');
 const Order = require('./models/Order');
 
-const uploadMiddleware = multer({ dest: 'uploads/' });
-
 const PORT = process.env.PORT || 4000;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
+
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000',
+  origin: process.env.NODE_ENV == "development" ? "http://localhost:3000" : 'same-origin',
 }));
 
 app.use(express.json());

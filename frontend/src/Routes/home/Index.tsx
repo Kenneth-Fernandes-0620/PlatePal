@@ -95,6 +95,11 @@ interface FoodItem {
 
 const MAX_ITEMS_PER_LOAD = 10;
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 export default function IndexPage() {
   // const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState('');
@@ -139,7 +144,7 @@ export default function IndexPage() {
 
   // Load the food categories Count on the first render
   useEffect(() => {
-    fetch(`${window.location.origin}/api/foodCategories`, {
+    fetch(`${host}/api/foodCategories`, {
       credentials: 'include',
       method: 'GET',
       headers: {
@@ -167,16 +172,13 @@ export default function IndexPage() {
     if (!hasMore) return;
 
     setLoading(true);
-    fetch(
-      `${window.location.origin}/api/food?page=${page}&limit=${MAX_ITEMS_PER_LOAD}`,
-      {
-        credentials: 'include',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    fetch(`${host}/api/food?page=${page}&limit=${MAX_ITEMS_PER_LOAD}`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+    })
       .then((response) => {
         response.json().then((data) => {
           if (data.length === 0) {
@@ -240,6 +242,7 @@ export default function IndexPage() {
             image={category.image}
             count={categoryCount.get(category.name.toLowerCase()) ?? 0}
             setCategoryFilter={setCategoryFilter}
+            currentCategory={categoryFilter}
             category={category.category}
           />
         ))}

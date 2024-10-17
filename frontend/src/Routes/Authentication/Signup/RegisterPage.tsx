@@ -11,6 +11,11 @@ import {
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { UserContext } from '../../../Components/UserContext';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : window.location.origin;
+
 const RegisterPage: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -62,7 +67,7 @@ const RegisterPage: FC = () => {
       return;
     }
 
-    fetch(`${window.location.origin}/api/register`, {
+    fetch(`${host}/api/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
